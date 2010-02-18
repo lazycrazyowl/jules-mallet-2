@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>de.julielab</groupId>
+  <artifactId>jules-mallet-2</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0</version>
+  <name>jules-mallet-2</name>
+  <description>JULIE-internal version of mallet, based currently on mallet-2.0-rc-1</description>
+
+
+	<distributionManagement>
+		<repository>
+			<id>login</id>
+			<name>JULIE-Lab Repository</name>
+			<url>
+				scp://login.coling.uni-jena.de/var/lib/maven/coling
+			</url>
+		</repository>
+	</distributionManagement>
+
+
+<dependencies> 
+ 		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.4</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>trove</groupId>
+			<artifactId>trove</artifactId>
+			<version>2.0.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>no.uib.cipr</groupId>
+			<artifactId>mtj</artifactId>
+			<version>0.9.9</version>
+		</dependency>
+		
+		
+		<dependency>
+			<groupId>org._3pg</groupId>
+			<artifactId>jgrapht</artifactId>
+			<version>0.6</version>
+		</dependency>
+		
+				<dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+				<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.14</version>
+		</dependency>
+		
+		
+		<dependency>
+			<groupId>bash</groupId>
+			<artifactId>bash</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+	
+ </dependencies>
+</project>
+
