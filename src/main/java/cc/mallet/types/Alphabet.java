@@ -14,11 +14,19 @@
 
 package cc.mallet.types;
 
-import java.util.ArrayList;
-import java.io.*;
-import java.util.Iterator;
-import java.util.HashMap;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.ObjectStreamException;
+import java.io.OutputStreamWriter;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.Serializable;
 import java.rmi.dgc.VMID;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  *  A mapping between integers and objects where the mapping in each
@@ -45,7 +53,8 @@ public class Alphabet implements Serializable
 	boolean growthStopped = false;
 	Class entryClass = null;
 	VMID instanceId = new VMID();  //used in readResolve to identify persitent instances
-
+	HashSet<String> h;
+	
 	public Alphabet (int capacity, Class entryClass)
 	{
 		this.map = new gnu.trove.TObjectIntHashMap (capacity);
@@ -111,9 +120,24 @@ public class Alphabet implements Serializable
 			retIndex = map.get( entry );
 		}
 		else if (!growthStopped && addIfNotPresent) {
+			
+			if (h == null)
+				h = new HashSet<String>();
+			String name = Thread.currentThread().getName();
+			h.add(name);
+			if (h.size() > 1) {
+				System.err.println("Threads using Alphabet " + System.identityHashCode(this));
+				for (String s : h)
+					System.err.println(s);
+				throw new IllegalStateException("Alphabet used AND MODIFIED by multiple threads!");
+			}
+			
 			retIndex = entries.size();
+//			System.out.println("Thread " + Thread.currentThread().getName() + " has Alphabet: " + System.identityHashCode(this) + " with map: " + System.identityHashCode(map));
 			map.put (entry, retIndex);
+//			System.out.println("Map vorbei!");
 			entries.add (entry);
+//			System.out.println("Entries vorbei!");
 		}
 		return retIndex;
 	}
